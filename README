@@ -1,0 +1,14 @@
+System Call Predictor records system calls and their preceding instructions to attempt to predict
+when a system call will occur
+
+To compile:
+	type 'make' - this will compile the program along with sample program hello.c
+
+To run:
+	/path/to/pin_root/pin -t obj-intel64/sys_pred.so <-o [filename]> <-b #> -- obj-intel64/hello
+
+	Use 'b' flag to set window of preceding instructions the program captures before a system call
+	If no flag is used, the default value is 5
+
+	Use 'o' flag to change filename of output file
+	Default name is 'trace.out'

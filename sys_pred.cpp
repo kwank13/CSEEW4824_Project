@@ -16,9 +16,9 @@ deque<string> instr_queue; // Running queue of instructions
 vector< vector<string> > calls; // Vector of sys calls and associated instrs
 uint buf_size; // Queue size
 
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "sys_call.out", "specify file name for branch predictor output");
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "trace.out", "specify file name for branch predictor output");
 // TODO: Test for all values of b
-KNOB<UINT32> KnobB(KNOB_MODE_WRITEONCE, "pintool", "b", "1", "Buffer size");
+KNOB<UINT32> KnobB(KNOB_MODE_WRITEONCE, "pintool", "b", "5", "Buffer size");
 
 // Prints system call # + arguments
 VOID PrintSys(ADDRINT ip, ADDRINT num, ADDRINT arg0, ADDRINT arg1, ADDRINT arg2, ADDRINT arg3, ADDRINT arg4, ADDRINT arg5)
@@ -103,6 +103,10 @@ INT32 Usage() {
 
 // Called once upon program exit
 VOID Fini(int code, VOID * v) {
+	string filename;
+	ofstream out;
+	filename = KnobOutputFile.Value();
+	out.open(filename.c_str());
 /*
 	// Prints queue
 	for (deque<string>::iterator it = instr_queue.begin(); it != instr_queue.end(); it++){
@@ -112,10 +116,11 @@ VOID Fini(int code, VOID * v) {
 	// Prints calls vector
 	for (vector< vector<string> >::iterator it = calls.begin(); it != calls.end(); it++){
 		for (vector<string>::iterator it2 = it->begin(); it2 != it->end(); it2++){
-			cout << *it2 << endl;
+			out << *it2 << endl;
 		}
-		cout << endl;
+		out << endl;
 	}
+	out.close();
 
 }
 
