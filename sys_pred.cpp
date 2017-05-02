@@ -116,7 +116,7 @@ VOID Fini(int code, VOID * v) {
 	// Prints calls vector
 	for (vector< vector<string> >::iterator it = calls.begin(); it != calls.end(); it++){
 		for (vector<string>::iterator it2 = it->begin(); it2 != it->end(); it2++){
-			out << *it2 << endl;
+			out << *it2 << "|";
 		}
 		out << endl;
 	}
