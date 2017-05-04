@@ -27,7 +27,7 @@ class TreeNode(object):
         for x in range(0, depth):
             sys.stdout.write(" ")
 
-        print self.weight, ":", self.instr
+        print "\\", self.weight, ":", self.instr
 
         if depth <= max_depth or max_depth==-1:
             self.children = sorted(self.children, key = lambda child: child.weight,
@@ -35,3 +35,13 @@ class TreeNode(object):
 
             for child in self.children:
                 child.print_tree(depth + 1, max_depth)
+
+
+    def get_syscalls(self):
+        if len(self.children) == 0:
+            return [self.instr]
+        else:
+            ret = []
+            for child in self.children:
+                ret += child.get_syscalls()
+            return ret
