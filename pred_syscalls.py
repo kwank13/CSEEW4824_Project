@@ -110,20 +110,6 @@ print "incorrect predictions:", incorrect_preds
 
 for child in instr_tree.children:
     if len(child.children) > 0:
-        num_calls = {}
-        calls = child.get_syscalls()
-        for call in calls:
-            if call in num_calls:
-                num_calls[call] += 1
-            else:
-                num_calls[call] = 1
-
-        orig_call_tuples = num_calls.items()
-        call_tuples = []
-
-        for tup in orig_call_tuples:
-            call_tuples.append((tup[1], tup[0]))
-
-        call_tuples = sorted(call_tuples, key=lambda tup: tup[0], reverse=True)
+        call_tuples = get_syscall_tuples(child)
         if call_tuples[0][0] != 1:
             print child.instr, child.weight, len(call_tuples), call_tuples
