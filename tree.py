@@ -5,6 +5,7 @@ class TreeNode(object):
         self.children = []
         self.weight = initWeight
         self.instr = instr
+        self.prev_syscall = ""
 
     def addChild(self, instr, weight=1):
         child = TreeNode(instr, weight)
@@ -23,6 +24,20 @@ class TreeNode(object):
     def incrementWeight(self):
         self.weight += 1
 
+    def set_prev_syscall(self, prev):
+        self.prev_syscall = prev
+
+    def get_instr(self, instr):
+        if self.instr == instr:
+            return self
+
+        for child in self.children:
+            new_instr = child
+            if new_instr.instr == instr:
+                return new_instr
+
+        return None
+
     def print_tree(self, depth=0, max_depth=-1):
         for x in range(0, depth):
             sys.stdout.write(" ")
@@ -35,7 +50,6 @@ class TreeNode(object):
 
             for child in self.children:
                 child.print_tree(depth + 1, max_depth)
-
 
     def get_syscalls(self):
         if len(self.children) == 0:
