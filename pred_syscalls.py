@@ -186,8 +186,6 @@ for line in syscall_file:
 
 #instr_tree.print_tree()
 
-print total_count
-
 print "correct predictions:", correct_preds
 print "incorrect predictions:", incorrect_preds
 
