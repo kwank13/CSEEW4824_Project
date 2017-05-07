@@ -160,16 +160,16 @@ for line in syscall_file:
             else:
                 predicted_instr = ""
 
-            found = False
-            for call in count_tups:
-                for tup in tuples:
-                    if tup[1] == call[0]:
-                        predicted_instr = call[0]
-                        found = True
-                        break
+            #found = False
+            #for call in count_tups:
+            #    for tup in tuples:
+            #        if tup[1] == call[0]:
+            #            predicted_instr = call[0]
+            #            found = True
+            #            break
 
-                if found:
-                    break
+            #    if found:
+            #        break
 
 
 
